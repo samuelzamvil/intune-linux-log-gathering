@@ -246,24 +246,6 @@ sudo -u "$SUDO_USER" $USER_XDG systemctl --user list-units 2>&1 \
     print_user_unit_row intune-agent.timer
     print_user_unit_row microsoft-identity-broker.service
 
-    echo ""
-    echo "----------------------------------------------------------------------"
-    echo "Intune agent journal signals (${LOG_DISPLAY})"
-    echo "----------------------------------------------------------------------"
-
-    AGENT_JOURNAL=$(sudo -u "$SUDO_USER" $USER_XDG \
-        journalctl --user --since "${JOURNAL_SINCE}" -u intune-agent.service 2>/dev/null)
-
-    last_checkin=$(echo "$AGENT_JOURNAL" | grep -i "Successfully checked in" | tail -1)
-    last_skip=$(echo "$AGENT_JOURNAL"    | grep -i "Skipping checkin"         | tail -1)
-    last_report=$(echo "$AGENT_JOURNAL"  | grep -i "Reporting status to Intune" | tail -1)
-    last_policy=$(echo "$AGENT_JOURNAL"  | grep -i "Processing assigned policies" | tail -1)
-
-    printf "%-44s %s\n" "Last successful check-in:"   "${last_checkin:-(none in window)}"
-    printf "%-44s %s\n" "Last skipped check-in:"      "${last_skip:-(none in window)}"
-    printf "%-44s %s\n" "Last policy report:"         "${last_report:-(none in window)}"
-    printf "%-44s %s\n" "Last policy count:"          "${last_policy:-(none in window)}"
-
 } > "$OUTDIR/00-summary.log" 2>&1
 
 # --- basic system info ---
