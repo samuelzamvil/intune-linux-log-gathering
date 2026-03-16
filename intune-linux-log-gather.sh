@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# intune-log-gather.sh
-# Run with sudo as the affected user: sudo bash intune-log-gather.sh
+# intune-linux-log-gather.sh
+# Run with sudo as the affected user: sudo bash intune-linux-log-gather.sh
 # Run once BEFORE check-in attempt, then again AFTER.
 # Output: timestamped zip on the user's Desktop
 #
-# Usage: sudo bash intune-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]
+# Usage: sudo bash intune-linux-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]
 #   --last,   -l <n>     pull logs from the last Nh or Nd (default: 24h)
 #                        e.g. -l 12h, -l 7d
 #   --since,  -s <time>  pull logs from an absolute point forward
@@ -12,7 +12,7 @@
 
 # --- require sudo ---
 if [[ -z "$SUDO_USER" ]]; then
-    echo "Run this script with sudo as the affected user: sudo bash intune-log-gather.sh"
+    echo "Run this script with sudo as the affected user: sudo bash intune-linux-log-gather.sh"
     exit 1
 fi
 
@@ -39,7 +39,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         *)
             echo "Unknown argument: $1"
-            echo "Usage: sudo bash intune-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]"
+            echo "Usage: sudo bash intune-linux-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]"
             echo "  --last examples:  -l 24h, -l 7d, -l 48h"
             echo "  --since examples: -s 2026-03-15, -s \"2026-03-15 10:00:00\""
             exit 1

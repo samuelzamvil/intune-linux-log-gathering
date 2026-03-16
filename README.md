@@ -1,4 +1,4 @@
-# intune-log-gather
+# intune-linux-log-gather
 
 A diagnostic log collector for Linux devices enrolled in Microsoft Intune. Captures systemd unit state, per-unit journals, and agent check-in signals before and after a manual sync. Pulls the last 24h by default; configurable with `--last` or `--since`. Requires sudo. Tested on Ubuntu and RHEL against Intune agent 1.2511.11.
 
@@ -11,7 +11,7 @@ A diagnostic log collector for Linux devices enrolled in Microsoft Intune. Captu
 ## Usage
 
 ```bash
-sudo bash intune-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]
+sudo bash intune-linux-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]
 ```
 
 | Flag | Description |
@@ -23,19 +23,19 @@ sudo bash intune-log-gather.sh [--last|-l <window> | --since|-s <timestamp>]
 
 ```bash
 # Default: last 24 hours
-sudo bash intune-log-gather.sh
+sudo bash intune-linux-log-gather.sh
 
 # Last 7 days
-sudo bash intune-log-gather.sh -l 7d
+sudo bash intune-linux-log-gather.sh -l 7d
 
 # Last 12 hours
-sudo bash intune-log-gather.sh -l 12h
+sudo bash intune-linux-log-gather.sh -l 12h
 
 # Everything since a specific date
-sudo bash intune-log-gather.sh -s 2026-03-15
+sudo bash intune-linux-log-gather.sh -s 2026-03-15
 
 # Everything since a specific time
-sudo bash intune-log-gather.sh -s "2026-03-15 10:00:00"
+sudo bash intune-linux-log-gather.sh -s "2026-03-15 10:00:00"
 ```
 
 ## Workflow
@@ -44,12 +44,12 @@ Run the script once before attempting a manual check-in, then again after. The t
 
 ```bash
 # Before
-sudo bash intune-log-gather.sh
+sudo bash intune-linux-log-gather.sh
 
 # Open the Intune portal app and click Refresh / Check-in
 
 # After
-sudo bash intune-log-gather.sh
+sudo bash intune-linux-log-gather.sh
 ```
 
 Output is saved to `~/Desktop/intune-logs-<timestamp>.zip`.
