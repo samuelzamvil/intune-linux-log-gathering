@@ -614,7 +614,7 @@ README_EOF
 fi
 
 # --- zip (base logs only, ms-support goes to Desktop separately), fix ownership, clean up ---
-zip -qr "$ZIPNAME" "$OUTDIR" 2>&1
+(cd /tmp && zip -qr "$ZIPNAME" "$(basename "$OUTDIR")") 2>&1
 chown "${SUDO_USER}:" "$ZIPNAME"
 rm -rf "$OUTDIR"
 
